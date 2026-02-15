@@ -13,10 +13,6 @@ A clean, lightweight, and responsive **Digital Notebook** built using HTML, CSS,
 - **CSS3:** Modern styling and layouts.
 - **JavaScript (ES6):** DOM manipulation and local storage logic.
 
-## 📸 Preview
-*(Optional: You can add a screenshot link here later)*
 
-## 🛠️ How to Run
-1. Clone the repository:
-   ```bash
-   git clone https://github.com
+
+
