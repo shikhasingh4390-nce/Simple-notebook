@@ -1,0 +1,31 @@
+body {
+    background-color: #f0f0f0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+}
+
+.toolbar {
+    padding: 10px;
+    background: #333;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+}
+
+.notebook-container {
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background-color: white;
+}
+
+canvas {
+    cursor: crosshair;
+    display: block;
+}

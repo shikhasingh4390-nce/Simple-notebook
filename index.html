@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Online Copy</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- PDF Library Link -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+</head>
+<body>
+
+    <div class="toolbar">
+        <button onclick="prevPage()">← Previous</button>
+        <span id="pageNumber">Page 1</span>
+        <button onclick="nextPage()">Next →</button>
+        <button onclick="clearCanvas()" style="background: #ff4d4d;">Clear Page</button>
+    </div>
+
+    <div class="notebook-container">
+        <!-- This is the 'paper' we will draw and write on -->
+        <canvas id="notebookCanvas"></canvas>
+    </div>
+    <!-- Add this right above the <script> tag -->
+<input type="text" id="textInput" style="position: absolute; opacity: 0; pointer-events: none;">
+
+<!-- Yeh buttons toolbar ke andar add karein -->
+<div style="display: inline-flex; align-items: center; gap: 10px; margin-left: 15px; border-left: 1px solid #666; padding-left: 15px;">
+    <input type="color" id="colorPicker" value="#000000" style="width:30px; height:30px; border:none; cursor:pointer;">
+    
+    <select id="penSize" style="padding: 5px; border-radius: 4px; cursor:pointer;">
+        <option value="2">Thin Pen</option>
+        <option value="5">Medium Pen</option>
+        <option value="10">Thick Pen</option>
+    </select>
+
+    <button onclick="setEraser()" style="background: #f0f0f0; color: #333;">Eraser</button>
+    <button onclick="setPen()" style="background: #4CAF50;">Pen</button>
+    
+    <!-- PDF ke liye button -->
+    <button onclick="downloadPDF()" style="background: #007bff;">Download PDF</button>
+</div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>
