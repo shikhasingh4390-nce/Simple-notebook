@@ -54,13 +54,15 @@ function getCoords(e) {
 }
 
 // 2. Drawing Logic with REAL Eraser
-canvas.addEventListener('mousedown', (e) => {
+// 2. Drawing Logic (PC + Mobile support)
+function startDrawing(e) {
     drawing = true;
     const coords = getCoords(e);
     [lastX, lastY] = [coords.x, coords.y];
-});
+    if (e.type === 'touchstart') e.preventDefault(); // Stop mobile scroll
+}
 
-canvas.addEventListener('mousemove', (e) => {
+function continueDrawing(e) {
     if (!drawing) return;
     const coords = getCoords(e);
     
@@ -69,11 +71,10 @@ canvas.addEventListener('mousemove', (e) => {
     ctx.lineTo(coords.x, coords.y);
     
     if (isEraser) {
-        // 'destination-out' se pixels delete hote hain (asli eraser)
         ctx.globalCompositeOperation = 'destination-out';
         ctx.lineWidth = 30;
     } else {
-        ctx.globalCompositeOperation = 'source-over'; // Normal drawing
+        ctx.globalCompositeOperation = 'source-over';
         ctx.strokeStyle = colorPicker.value;
         ctx.lineWidth = penSize.value;
     }
@@ -83,17 +84,27 @@ canvas.addEventListener('mousemove', (e) => {
     ctx.stroke();
     
     [lastX, lastY] = [coords.x, coords.y];
-    
-    // Har stroke ke baad lines ko redraw karna zaroori hai
     drawBackgroundLines(); 
-});
+    if (e.type === 'touchmove') e.preventDefault(); // Stop mobile scroll
+}
 
-window.addEventListener('mouseup', () => {
+function stopDrawing() {
     if(drawing) {
         drawing = false;
         saveToBrowser();
     }
-});
+}
+
+// PC (Mouse) Events
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mousemove', continueDrawing);
+window.addEventListener('mouseup', stopDrawing);
+
+// Mobile (Touch) Events
+canvas.addEventListener('touchstart', startDrawing, { passive: false });
+canvas.addEventListener('touchmove', continueDrawing, { passive: false });
+canvas.addEventListener('touchend', stopDrawing);
+
 
 // 3. Typing Logic
 canvas.addEventListener('click', (e) => {
